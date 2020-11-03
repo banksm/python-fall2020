@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+#based on Matchesca tutorial!
 
 # In[ ]:
 
@@ -38,14 +39,6 @@ if choice == '1':
 if choice == '1':
     print(f'{num1} / {num2} = {div(num1, num2)}')
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
