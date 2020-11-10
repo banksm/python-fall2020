@@ -33,10 +33,10 @@ if choice == '1':
 if choice == '2':
     print(f'{num1} - {num2} = {sub(num1, num2)}')
 
-if choice == '1':
+if choice == '3':
     print(f'{num1} * {num2} = {mul(num1, num2)}')
 
-if choice == '1':
+if choice == '4':
     print(f'{num1} / {num2} = {div(num1, num2)}')
 
 
