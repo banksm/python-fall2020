@@ -196,7 +196,7 @@ print(res)
 
 
 #export to csv file 
-import pandas
+
 df = pandas.DataFrame(data= {"col1": outputsA, "col2": outputsB})
 
 
