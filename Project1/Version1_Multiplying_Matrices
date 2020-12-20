@@ -1,0 +1,227 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[2]:
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd 
+import qiskit as qk
+from matplotlib import cm, colors
+from mpl_toolkits.mplot3d import Axes3D
+
+#will need to write code to auto log into IBM and run real circuits 
+#go to IBM
+#access account
+#create circuit
+#use 15qb computer
+#run circuit
+
+# Creating Qubits
+q = qk.QuantumRegister(15)
+# Creating Classical Bits
+c = qk.ClassicalRegister(15)
+
+circuit = qk.QuantumCircuit(q, c)
+
+# Hadamard Gate on the Qubit
+circuit.h(q[0])
+circuit.h(q[1])
+circuit.h(q[2])
+circuit.h(q[3])
+circuit.h(q[4])
+circuit.h(q[5])
+circuit.h(q[6])
+circuit.h(q[7])
+circuit.h(q[8])
+circuit.h(q[9])
+circuit.h(q[10])
+circuit.h(q[11])
+circuit.h(q[12])
+circuit.h(q[13])
+circuit.h(q[14])
+
+
+# Measuring the Qubits
+circuit.measure(q, c)
+
+print (circuit)
+
+
+# In[3]:
+
+
+# Using Qiskit Aer's Qasm Simulator
+simulator = qk.BasicAer.get_backend('qasm_simulator')
+
+# Simulating the circuit using the simulator to get the result
+job = qk.execute(circuit, simulator)
+result = job.result()
+
+# Getting the aggregated binary outcomes of the circuit.
+counts = result.get_counts(circuit)
+
+print (counts)
+
+
+# In[4]:
+
+
+#Convert counts to set to get rid of duplicate
+my_set= set(counts)
+my_string = str(my_set)
+print (my_string)
+
+
+# In[5]:
+
+
+#Get a random sample and create a matrix
+
+import random
+my_sample1 = (random.sample(my_set,15))
+my_list1 = list(my_sample1)
+my_list1.sort()
+
+#Get a second random sample
+
+my_sample2 = (random.sample(my_set,15))
+my_list2 = list(my_sample2)
+my_list2.sort()
+
+print ('Sorted list: One', my_list1)
+print ('Sorted list: Two', my_list2)
+ 
+
+
+# In[6]:
+
+
+np.array(my_list1).reshape(1,15)
+
+
+# In[7]:
+
+
+np.array(my_list2).reshape(1,15)
+
+
+# In[8]:
+
+
+input = my_list1
+
+# Using map 
+output_A0= list(map(int, str(input[0]))) 
+output_A1 = list(map(int, str(input[1]))) 
+output_A2 = list(map(int, str(input[2]))) 
+output_A3 = list(map(int, str(input[3]))) 
+output_A4 = list(map(int, str(input[4]))) 
+output_A5 = list(map(int, str(input[5]))) 
+output_A6 = list(map(int, str(input[6]))) 
+output_A7 = list(map(int, str(input[7]))) 
+output_A8 = list(map(int, str(input[8]))) 
+output_A9 = list(map(int, str(input[9]))) 
+output_A10 = list(map(int, str(input[10]))) 
+output_A11 = list(map(int, str(input[11]))) 
+output_A12 = list(map(int, str(input[12]))) 
+output_A13 = list(map(int, str(input[13]))) 
+output_A14 = list(map(int, str(input[14]))) 
+
+outputsA= (output_A0,output_A1,output_A2,output_A3,output_A4,output_A5,output_A6,output_A7,output_A8,
+          output_A9,output_A10,output_A11,output_A12,output_A13,output_A14)
+  
+# Printing output 
+print(outputsA)
+
+
+# In[9]:
+
+
+input = my_list2
+
+# Using map 
+output_B0= list(map(int, str(input[0]))) 
+output_B1 = list(map(int, str(input[1]))) 
+output_B2 = list(map(int, str(input[2]))) 
+output_B3 = list(map(int, str(input[3]))) 
+output_B4 = list(map(int, str(input[4]))) 
+output_B5 = list(map(int, str(input[5]))) 
+output_B6 = list(map(int, str(input[6]))) 
+output_B7 = list(map(int, str(input[7]))) 
+output_B8 = list(map(int, str(input[8]))) 
+output_B9 = list(map(int, str(input[9]))) 
+output_B10 = list(map(int, str(input[10]))) 
+output_B11 = list(map(int, str(input[11]))) 
+output_B12 = list(map(int, str(input[12]))) 
+output_B13 = list(map(int, str(input[13]))) 
+output_B14 = list(map(int, str(input[14]))) 
+
+outputsB= (output_B0,output_B1,output_B2,output_B3,output_B4,output_B5,output_B6,output_B7,output_B8,
+          output_B9,output_B10,output_B11,output_B12,output_B13,output_B14)
+  
+# Printing output 
+print(outputsB)
+
+
+# In[10]:
+
+
+#create two matrices from the outputs
+a = np.matrix(outputsA)
+b = np.matrix(outputsB)
+print (a)
+print(" ")
+print(b)
+
+
+# In[11]:
+
+
+# input two matrices and multiply 
+mat1 = a
+mat2 = b
+res= np.multiply(a,b)
+print(res)
+
+
+# In[30]:
+
+
+# Z is matrix data set
+#N = 15
+Z = res
+
+# G is a NxNx3 matrix
+G = np.zeros((N,N,3))
+
+#Set the RGB for each pixel
+G[Z>0.5] = [1,1,1]
+G[Z<0.5] = [0,0,0]
+
+
+#show the image with no axis keys
+plt.imshow(G)
+plt.axis('off')
+fig1.savefig('CVtest.jpg', dpi=100)
+
+
+# In[39]:
+
+
+#have open cv convert back to binary
+#read image
+#look at the pixels
+#convert pixels that are black to '0' and pixels that are white to '1'
+
+
+import cv2
+img = cv2.imread('CVtest.jpg', cv2.IMREAD_GRAYSCALE)
+print("Image Dimensions:", img.shape)
+
+
+#intialize computer vision
+#read image
+#convert image back into binary matrix 
+#match new conversion to intial matrix
+#if matched, then access something...??
